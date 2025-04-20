@@ -21,6 +21,7 @@ int main() {
     enum FirstLevelMenu { MENU_USER, MENU_ADMIN, EXIT_PROGRAM };
     enum RegistrationMenu { MENU_AUTH_REGISTER, MENU_AUTH_LOGIN, MENU_AUTH_GO_BACK };
     enum UserMenu { USER_VIEW_TABLE, USER_SEARCH, USER_FILTER, USER_CUSTOM_TASK, USER_GO_BACK, USER_EXIT };
+    enum UserManagementMenu { USER_MGMT_VIEW_ALL, USER_MGMT_BLOCK, USER_MGMT_UNBLOCK, USER_MGMT_DELETE, USER_MGMT_GO_BACK };
     enum AdminMenu { ADMIN_VIEW_TABLE, ADMIN_ADD_RECORD, ADMIN_EDIT_RECORD, ADMIN_DELETE_RECORD, ADMIN_SEARCH, ADMIN_FILTER, ADMIN_SORT, ADMIN_CUSTOM_TASK, ADMIN_MANAGE_USERS, ADMIN_GO_BACK, ADMIN_EXIT };
 
     AuthSystem authSystem;
@@ -80,7 +81,7 @@ int main() {
                             };
                             const int userMenu_Count = sizeof(userMenu) / sizeof(userMenu[0]);
 
-                            int userChoice = main_showMenu(".../firstLevelMenu/registrationMenu/userMenu", userMenu, userMenu_Count, 1);
+                            int userChoice = main_showMenu(".../firstLevelMenu/registrationMenu/USER/userMenu", userMenu, userMenu_Count, 1);
 
                             switch (userChoice) {
                             case USER_VIEW_TABLE: {
@@ -165,7 +166,7 @@ int main() {
                                 };
                                 const int adminMenu_Count = sizeof(adminMenu) / sizeof(adminMenu[0]);
 
-                                int adminChoice = main_showMenu(".../firstLevelMenu/adminMenu/", adminMenu, adminMenu_Count, 1);
+                                int adminChoice = main_showMenu(".../firstLevelMenu/registrationMenu/ADMIN/adminMenu/", adminMenu, adminMenu_Count, 1);
 
                                 switch (adminChoice) {
                                 case ADMIN_VIEW_TABLE: {
@@ -201,6 +202,120 @@ int main() {
                                     break;
                                 }
                                 case ADMIN_MANAGE_USERS: {
+                                    bool shouldReturnToAdminMenu = false;
+                                    while (!shouldReturnToAdminMenu) {
+                                        hideCursor();
+
+                                        const std::string userMgmtMenu[]{
+                                            "Просмотр всех пользователей",
+                                            "Заблокировать пользователя",
+                                            "Разблокировать пользователя",
+                                            "Удалить пользователя",
+                                            "Вернуться назад"
+                                        };
+                                        const int userMgmtMenu_Count = sizeof(userMgmtMenu) / sizeof(userMgmtMenu[0]);
+
+                                        int userMgmtChoice = main_showMenu(".../firstLevelMenu/registrationMenu/ADMIN/adminMenu/userManagement/", userMgmtMenu, userMgmtMenu_Count);
+
+                                        switch (userMgmtChoice) {
+                                        case USER_MGMT_VIEW_ALL: {
+                                            system("cls");
+                                            std::cout << "Список всех пользователей:\n\n";
+                                            std::cout << "------------------------------------------------\n";
+                                            std::cout << "| №  | Полное имя      | Логин      | Статус   |\n";
+                                            std::cout << "------------------------------------------------\n";
+
+                                            int index = 1;
+                                            for (const auto& user : authSystem.users) {
+                                                std::cout << "| " << index++ << "  | ";
+                                                std::cout.width(15);
+                                                std::cout << std::left << user.GetFullname() << " | ";
+                                                std::cout.width(10);
+                                                std::cout << std::left << user.GetUsername() << " | ";
+                                                std::cout.width(8);
+                                                std::cout << std::left << (user.GetIsBlocked() ? "Заблок." : "Активен") << " |\n";
+                                            }
+                                            std::cout << "------------------------------------------------\n";
+                                            system("pause");
+                                            break;
+                                        }
+                                        case USER_MGMT_BLOCK: {
+                                            system("cls");
+                                            std::cout << "Заблокировать пользователя:\n\n";
+                                            std::cout << "Введите логин пользователя: ";
+                                            std::string username;
+                                            letter_filteredInput<std::string>(username);
+
+                                            bool found = false;
+                                            for (auto& user : authSystem.users) {
+                                                if (user.GetUsername() == username) {
+                                                    user.SetIsBlocked(true);
+                                                    authSystem.saveUsers();
+                                                    std::cout << "\nПользователь " << username << " успешно заблокирован.\n";
+                                                    found = true;
+                                                    break;
+                                                }
+                                            }
+
+                                            if (!found) {
+                                                std::cout << "\nПользователь с таким логином не найден.\n";
+                                            }
+                                            system("pause");
+                                            break;
+                                        }
+                                        case USER_MGMT_UNBLOCK: {
+                                            system("cls");
+                                            std::cout << "Разблокировать пользователя:\n\n";
+                                            std::cout << "Введите логин пользователя: ";
+                                            std::string username;
+                                            letter_filteredInput<std::string>(username);
+
+                                            bool found = false;
+                                            for (auto& user : authSystem.users) {
+                                                if (user.GetUsername() == username) {
+                                                    user.SetIsBlocked(false);
+                                                    authSystem.saveUsers();
+                                                    std::cout << "\nПользователь " << username << " успешно разблокирован.\n";
+                                                    found = true;
+                                                    break;
+                                                }
+                                            }
+
+                                            if (!found) {
+                                                std::cout << "\nПользователь с таким логином не найден.\n";
+                                            }
+                                            system("pause");
+                                            break;
+                                        }
+                                        case USER_MGMT_DELETE: {
+                                            system("cls");
+                                            std::cout << "Удалить пользователя:\n\n";
+                                            std::cout << "Введите логин пользователя: ";
+                                            std::string username;
+                                            letter_filteredInput<std::string>(username);
+
+                                            auto it = std::remove_if(authSystem.users.begin(), authSystem.users.end(),
+                                                [&username](const User& user) {
+                                                    return user.GetUsername() == username;
+                                                });
+
+                                            if (it != authSystem.users.end()) {
+                                                authSystem.users.erase(it, authSystem.users.end());
+                                                authSystem.saveUsers();
+                                                std::cout << "\nПользователь " << username << " успешно удален.\n";
+                                            }
+                                            else {
+                                                std::cout << "\nПользователь с таким логином не найден.\n";
+                                            }
+                                            system("pause");
+                                            break;
+                                        }
+                                        case USER_MGMT_GO_BACK: {
+                                            shouldReturnToAdminMenu = true;
+                                            break;
+                                        }
+                                        }
+                                    }
                                     break;
                                 }
                                 case ADMIN_GO_BACK: {
