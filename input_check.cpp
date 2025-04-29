@@ -92,14 +92,13 @@ bool check_englishLetters_specSymbols_input(const std::string& s) {
 bool check_russian_englishLetters_input(const std::string& s) {
     if (s.empty()) return false;
     char c = s[0];
-    return (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z' || c >= 'à' && c <= 'ÿ') || (c >= 'À' && c <= 'ß');
+    return (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || (c >= 'à' && c <= 'ÿ') || (c >= 'À' && c <= 'ß');
 }
 bool check_englishLetters_input(const std::string& s) {
     if (s.empty()) return false;
     char c = s[0];
     return (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z');
 }
-
 
 //==============DEBUG==============
 /*

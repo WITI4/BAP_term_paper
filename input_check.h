@@ -1,7 +1,8 @@
-#pragma once
+﻿#pragma once
 #include <iostream>
 #include <string>
 #include <conio.h>
+#include <windows.h>
 
 constexpr const int ENTER = 13;
 constexpr const int BACKSPACE = 8;
@@ -125,9 +126,71 @@ bool number_filteredInput(T& result, bool requireNegative = false, bool requireP
     }
 }
 
+
 template <typename T>
-void letter_filteredInput(std::string& buf, bool check_english = false, bool check_russian_english = false, bool mask_input = false) {
-    buf.clear();
+void letter_filteredInput(std::string& buf, bool check_english = false, bool check_russian_english = false, bool mask_input = false, bool check_password_strength = false) {
+    HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+    CONSOLE_SCREEN_BUFFER_INFO csbi;
+    GetConsoleScreenBufferInfo(hConsole, &csbi);
+    WORD originalAttrs = csbi.wAttributes;
+
+    bool hasUpper = false, hasLower = false, hasDigit = false, hasSpecial = false;
+    int requirementsStartLine = 0;
+
+    auto PrintPasswordRequirements = [&]() {
+        if (!check_password_strength) return;
+
+        GetConsoleScreenBufferInfo(hConsole, &csbi);
+        COORD currentPos = csbi.dwCursorPosition;
+
+        COORD pos = { 0, requirementsStartLine };
+        SetConsoleCursorPosition(hConsole, pos);
+
+        DWORD written;
+        for (int i = 0; i < 5; i++) {
+            FillConsoleOutputCharacter(hConsole, ' ', csbi.dwSize.X, pos, &written);
+            pos.Y++;
+        }
+
+        pos.Y = requirementsStartLine;
+        SetConsoleCursorPosition(hConsole, pos);
+
+        std::cout << "Требования к паролю (необходимо 3 из 4):\n";
+
+        SetConsoleTextAttribute(hConsole, hasUpper ? FOREGROUND_GREEN : FOREGROUND_RED);
+        std::cout << "- Заглавные буквы\n";
+        SetConsoleTextAttribute(hConsole, hasLower ? FOREGROUND_GREEN : FOREGROUND_RED);
+        std::cout << "- Строчные буквы\n";
+        SetConsoleTextAttribute(hConsole, hasDigit ? FOREGROUND_GREEN : FOREGROUND_RED);
+        std::cout << "- Цифры\n";
+        SetConsoleTextAttribute(hConsole, hasSpecial ? FOREGROUND_GREEN : FOREGROUND_RED);
+        std::cout << "- Специальные символы\n";
+
+        SetConsoleTextAttribute(hConsole, originalAttrs);
+        SetConsoleCursorPosition(hConsole, currentPos);
+        };
+
+    auto CheckPasswordValid = [&]() {
+        int fulfilled = 0;
+        if (hasUpper) fulfilled++;
+        if (hasLower) fulfilled++;
+        if (hasDigit) fulfilled++;
+        if (hasSpecial) fulfilled++;
+        return fulfilled >= 3;
+        };
+
+    if (check_password_strength) {
+        std::cout << "\nТребования к паролю (необходимо 3 из 4):\n";
+        std::cout << "- Заглавные буквы\n";
+        std::cout << "- Строчные буквы\n";
+        std::cout << "- Цифры\n";
+        std::cout << "- Специальные символы\n";
+
+        GetConsoleScreenBufferInfo(hConsole, &csbi);
+        requirementsStartLine = csbi.dwCursorPosition.Y - 5;
+
+        std::cout << "\nПароль: ";
+    }
 
     while (true) {
         int c = _getch();
@@ -137,9 +200,22 @@ void letter_filteredInput(std::string& buf, bool check_english = false, bool che
             continue;
         }
 
-        if (c == BACKSPACE && !buf.empty()) {
-            buf.pop_back();
-            std::cout << "\b \b";
+        if (c == BACKSPACE) {
+            if (!buf.empty()) {
+                buf.pop_back();
+                std::cout << "\b \b";
+
+                if (check_password_strength) {
+                    hasUpper = hasLower = hasDigit = hasSpecial = false;
+                    for (char ch : buf) {
+                        if (isupper(ch)) hasUpper = true;
+                        if (islower(ch)) hasLower = true;
+                        if (isdigit(ch)) hasDigit = true;
+                        if (ispunct(ch)) hasSpecial = true;
+                    }
+                    PrintPasswordRequirements();
+                }
+            }
             continue;
         }
 
@@ -157,12 +233,15 @@ void letter_filteredInput(std::string& buf, bool check_english = false, bool che
                 }
             }
             else {
-                std::cout << std::endl;
-                return;
+                if (!check_password_strength || CheckPasswordValid()) {
+                    std::cout << std::endl;
+                    return;
+                }
             }
+            continue;
         }
 
-        if constexpr (std::is_same_v<T, std::string>) {
+        if (buf.size() < MAX_DIGITS) {
             std::string charAsString(1, char(c));
             bool isValid = false;
 
@@ -176,13 +255,18 @@ void letter_filteredInput(std::string& buf, bool check_english = false, bool che
                 isValid = check_englishLetters_specSymbols_input(charAsString);
             }
 
-            if (isValid && buf.size() < MAX_DIGITS) {
+            if (isValid) {
                 buf += char(c);
-                if (mask_input) {
-                    std::cout << '*';
-                }
-                else {
-                    std::cout << char(c);
+                std::cout << (mask_input ? '*' : char(c));
+
+                if (check_password_strength) {
+                    char ch = char(c);
+                    if (isupper(ch)) hasUpper = true;
+                    if (islower(ch)) hasLower = true;
+                    if (isdigit(ch)) hasDigit = true;
+                    if (ispunct(ch)) hasSpecial = true;
+
+                    PrintPasswordRequirements();
                 }
             }
         }

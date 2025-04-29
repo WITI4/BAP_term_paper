@@ -10,6 +10,7 @@
 #include <string>
 #include <fstream>
 #include <vector>
+#include <iomanip>
 
 int main() {
     SetConsoleCP(1251);
@@ -62,9 +63,9 @@ int main() {
                     break;
                 }
                 case MENU_AUTH_LOGIN: {
-                    currentUser = authSystem.loginUser();
-                    if (currentUser != nullptr) {
-                        std::cout << std::endl << "Добро пожаловать, " << currentUser->GetFullname() << "!" << std::endl;
+                    int userIndex = authSystem.loginUser();
+                    if (userIndex != -1) {
+                        std::cout << std::endl << "Добро пожаловать, " << authSystem.users[userIndex].GetFullname() << "!" << std::endl;
                         system("pause");
 
                         // Меню пользователя    
@@ -142,9 +143,9 @@ int main() {
                         break;
                     }
                     case MENU_AUTH_LOGIN: {
-                        currentUser = authSystem.loginUser();
-                        if (currentUser != nullptr) {
-                            std::cout << std::endl << "Добро пожаловать, " << currentUser->GetFullname() << "!" << std::endl;
+                        int userIndex = authSystem.loginUser();
+                        if (userIndex != -1) {
+                            std::cout << std::endl << "Добро пожаловать, " << authSystem.users[userIndex].GetFullname() << "!" << std::endl;
                             system("pause");
 
                             // Меню админа    
@@ -221,21 +222,18 @@ int main() {
                                         case USER_MGMT_VIEW_ALL: {
                                             system("cls");
                                             std::cout << "Список всех пользователей:\n\n";
-                                            std::cout << "------------------------------------------------\n";
-                                            std::cout << "| №  | Полное имя      | Логин      | Статус   |\n";
-                                            std::cout << "------------------------------------------------\n";
+                                            std::cout << "----------------------------------------------------\n";
+                                            std::cout << "| №    | Полное имя      | Логин        | Статус   |\n";
+                                            std::cout << "----------------------------------------------------\n";
 
                                             int index = 1;
                                             for (const auto& user : authSystem.users) {
-                                                std::cout << "| " << index++ << "  | ";
-                                                std::cout.width(15);
-                                                std::cout << std::left << user.GetFullname() << " | ";
-                                                std::cout.width(10);
-                                                std::cout << std::left << user.GetUsername() << " | ";
-                                                std::cout.width(8);
-                                                std::cout << std::left << (user.GetIsBlocked() ? "Заблок." : "Активен") << " |\n";
+                                                std::cout << "| " << std::setw(4) << std::left << index++ << " | ";
+                                                std::cout << std::setw(15) << std::left << user.GetFullname() << " | ";
+                                                std::cout << std::setw(12) << std::left << user.GetUsername() << " | ";
+                                                std::cout << std::setw(8) << std::left << (user.GetIsBlocked() ? "Заблок." : "Активен") << " |\n";
                                             }
-                                            std::cout << "------------------------------------------------\n";
+                                            std::cout << "-----------------------------------------------------\n";
                                             system("pause");
                                             break;
                                         }
@@ -247,9 +245,9 @@ int main() {
                                             letter_filteredInput<std::string>(username);
 
                                             bool found = false;
-                                            for (auto& user : authSystem.users) {
-                                                if (user.GetUsername() == username) {
-                                                    user.SetIsBlocked(true);
+                                            for (int i = 0; i < authSystem.users.size(); i++) {
+                                                if (authSystem.users[i].GetUsername() == username) {
+                                                    authSystem.users[i].SetIsBlocked(true);
                                                     authSystem.saveUsers();
                                                     std::cout << "\nПользователь " << username << " успешно заблокирован.\n";
                                                     found = true;
@@ -271,9 +269,9 @@ int main() {
                                             letter_filteredInput<std::string>(username);
 
                                             bool found = false;
-                                            for (auto& user : authSystem.users) {
-                                                if (user.GetUsername() == username) {
-                                                    user.SetIsBlocked(false);
+                                            for (int i = 0; i < authSystem.users.size(); i++) {
+                                                if (authSystem.users[i].GetUsername() == username) {
+                                                    authSystem.users[i].SetIsBlocked(false);
                                                     authSystem.saveUsers();
                                                     std::cout << "\nПользователь " << username << " успешно разблокирован.\n";
                                                     found = true;
@@ -294,17 +292,19 @@ int main() {
                                             std::string username;
                                             letter_filteredInput<std::string>(username);
 
-                                            auto it = std::remove_if(authSystem.users.begin(), authSystem.users.end(),
-                                                [&username](const User& user) {
-                                                    return user.GetUsername() == username;
-                                                });
 
-                                            if (it != authSystem.users.end()) {
-                                                authSystem.users.erase(it, authSystem.users.end());
-                                                authSystem.saveUsers();
-                                                std::cout << "\nПользователь " << username << " успешно удален.\n";
+                                            bool found = false;
+                                            for (int i = 0; i < authSystem.users.size(); i++) {
+                                                if (authSystem.users[i].GetUsername() == username) {
+                                                    authSystem.users.erase(authSystem.users.begin() + i);
+                                                    authSystem.saveUsers();
+                                                    std::cout << "\nПользователь " << username << " успешно удален.\n";
+                                                    found = true;
+                                                    break;
+                                                }
                                             }
-                                            else {
+
+                                            if (!found) {
                                                 std::cout << "\nПользователь с таким логином не найден.\n";
                                             }
                                             system("pause");
