@@ -1,0 +1,101 @@
+Sci	Space Files	26.06.2023	11:00	11:30	30	12	2	0	middle	32000
+Sci	Space Files	27.06.2023	14:00	14:30	30	12	2	0	beginning	32000
+Sci	Cosmic Journeys	29.06.2023	09:00	09:30	30	15	3	0	beginning	38000
+Sci	Cosmic Journeys	30.06.2023	16:00	16:30	30	15	3	0	middle	38000
+Sci	Future Tech	02.07.2023	13:00	13:45	45	18	4	0	middle	54000
+Sci	Future Tech	03.07.2023	19:00	19:45	45	18	4	0	end	108000
+Geo	Ocean Myst	27.06.2023	21:00	22:00	60	8	1	1	beginning	168000
+Geo	Ocean Myst	28.06.2023	10:00	11:00	60	8	1	1	middle	84000
+Geo	Ocean Myst	29.06.2023	15:00	16:00	60	8	1	1	end	84000
+Geo	Wild Amazon	30.06.2023	19:00	20:00	60	10	2	1	middle	92000
+Geo	Wild Amazon	01.07.2023	14:00	15:00	60	10	2	1	beginning	92000
+Geo	Wild Amazon	02.07.2023	22:00	23:00	60	10	2	1	end	184000
+Geo	Arctic Frontier	03.07.2023	08:00	09:30	90	12	3	1	middle	135000
+CBBC	The Dumping	28.06.2023	09:00	09:30	30	20	1	1	end	31000
+CBBC	The Dumping	29.06.2023	12:00	12:30	30	20	1	1	middle	31000
+CBBC	The Dumping	30.06.2023	17:00	17:30	30	20	1	1	beginning	62000
+CBBC	Horrible Histories	01.07.2023	08:30	09:00	30	25	2	0	middle	29000
+CBBC	Horrible Histories	02.07.2023	15:30	16:00	30	25	2	0	beginning	29000
+CBBC	Horrible Histories	03.07.2023	18:30	19:00	30	25	2	0	end	58000
+CBBC	My Life	04.07.2023	14:30	15:00	30	30	3	0	beginning	45000
+CBBC	My Life	05.07.2023	16:30	17:00	30	30	3	0	middle	45000
+CBBC	My Life	06.07.2023	18:30	19:00	30	30	3	0	end	90000
+MSNBC	Morning Joe	29.06.2023	06:00	07:00	60	15	3	1	middle	55000
+MSNBC	Morning Joe	30.06.2023	08:00	09:00	60	15	3	1	beginning	55000
+MSNBC	Morning Joe	01.07.2023	07:00	08:00	60	15	3	1	end	55000
+MSNBC	Rachel Maddow	02.07.2023	21:00	22:00	60	18	4	1	end	132000
+MSNBC	Rachel Maddow	03.07.2023	20:00	21:00	60	18	4	1	middle	66000
+MSNBC	Rachel Maddow	04.07.2023	19:00	20:00	60	18	4	1	beginning	66000
+MSNBC	The Last Word	05.07.2023	22:00	23:00	60	20	5	1	beginning	140000
+MSNBC	The Last Word	06.07.2023	21:00	22:00	60	20	5	1	middle	140000
+FoxN	Gutfeld!	30.06.2023	22:00	23:00	60	10	5	1	beginning	144000
+FoxN	Gutfeld!	01.07.2023	21:00	22:00	60	10	5	1	middle	144000
+FoxN	Gutfeld!	02.07.2023	23:00	00:00	60	10	5	1	end	72000
+FoxN	Tucker Carlson	03.07.2023	20:00	21:00	60	12	6	1	middle	96000
+FoxN	Tucker Carlson	04.07.2023	19:00	20:00	60	12	6	1	beginning	96000
+FoxN	Tucker Carlson	05.07.2023	22:00	23:00	60	12	6	1	end	192000
+FoxN	Hannity	06.07.2023	20:00	21:00	60	14	7	1	beginning	168000
+FoxN	Hannity	07.07.2023	19:00	20:00	60	14	7	1	middle	168000
+HBO	Succession	01.07.2023	21:00	22:00	60	5	1	1	end	184000
+HBO	Succession	02.07.2023	20:00	21:00	60	5	1	1	middle	92000
+HBO	Succession	03.07.2023	22:00	23:00	60	5	1	1	beginning	184000
+HBO	Westworld	04.07.2023	21:30	22:30	60	6	2	1	beginning	118000
+HBO	Westworld	05.07.2023	20:30	21:30	60	6	2	1	middle	59000
+HBO	Westworld	06.07.2023	23:30	00:30	60	6	2	1	end	59000
+HBO	Game of Thrones	07.07.2023	21:00	22:00	60	8	3	1	middle	144000
+HBO	Game of Thrones	08.07.2023	20:00	21:00	60	8	3	1	beginning	144000
+NFL	Game Day	02.07.2023	12:00	13:00	60	7	4	0	middle	48000
+NFL	Game Day	03.07.2023	11:00	12:00	60	7	4	0	beginning	48000
+NFL	Game Day	04.07.2023	13:00	14:00	60	7	4	0	end	48000
+NFL	RedZone	05.07.2023	18:00	19:00	60	9	5	0	beginning	72000
+NFL	RedZone	06.07.2023	17:00	18:00	60	9	5	0	middle	36000
+NFL	RedZone	07.07.2023	19:00	20:00	60	9	5	0	end	72000
+NFL	Total Access	08.07.2023	22:00	23:00	60	11	6	0	end	132000
+VH1	Love & Hip	03.07.2023	15:00	16:00	60	9	2	0	beginning	33000
+VH1	Love & Hip	04.07.2023	16:00	17:00	60	9	2	0	middle	33000
+VH1	Love & Hip	05.07.2023	14:00	15:00	60	9	2	0	end	33000
+VH1	Basketball Wives	06.07.2023	20:00	21:00	60	12	3	0	end	78000
+VH1	Basketball Wives	07.07.2023	19:00	20:00	60	12	3	0	middle	39000
+VH1	Basketball Wives	08.07.2023	21:00	22:00	60	12	3	0	beginning	78000
+VH1	RuPaul	09.07.2023	22:30	23:30	60	15	4	0	middle	90000
+CC	Awkward.	04.07.2023	19:30	20:00	30	18	1	1	end	102000
+CC	Awkward.	05.07.2023	18:30	19:00	30	18	1	1	middle	51000
+CC	Awkward.	06.07.2023	20:30	21:00	30	18	1	1	beginning	102000
+CC	South Park	07.07.2023	22:00	22:30	30	20	2	1	beginning	88000
+CC	South Park	08.07.2023	21:00	21:30	30	20	2	1	middle	44000
+CC	South Park	09.07.2023	23:00	23:30	30	20	2	1	end	44000
+CC	The Office	10.07.2023	19:30	20:00	30	25	3	1	middle	75000
+FoodN	Diners	05.07.2023	14:00	15:00	60	6	1	1	middle	49000
+FoodN	Diners	06.07.2023	13:00	14:00	60	6	1	1	beginning	49000
+FoodN	Diners	07.07.2023	15:00	16:00	60	6	1	1	end	49000
+FoodN	Chopped	08.07.2023	20:00	21:00	60	8	2	1	end	104000
+FoodN	Chopped	09.07.2023	19:00	20:00	60	8	2	1	middle	52000
+FoodN	Chopped	10.07.2023	21:00	22:00	60	8	2	1	beginning	104000
+FoodN	Iron Chef	11.07.2023	18:00	19:00	60	10	3	1	beginning	150000
+AMC	Better Call	06.07.2023	22:00	23:00	60	4	1	1	beginning	176000
+AMC	Better Call	07.07.2023	21:00	22:00	60	4	1	1	middle	176000
+AMC	Better Call	08.07.2023	23:00	00:00	60	4	1	1	end	88000
+AMC	The Walking Dead	09.07.2023	21:30	22:30	60	5	2	1	end	110000
+AMC	The Walking Dead	10.07.2023	20:30	21:30	60	5	2	1	middle	55000
+AMC	The Walking Dead	11.07.2023	22:30	23:30	60	5	2	1	beginning	110000
+AMC	Breaking Bad	12.07.2023	21:00	22:00	60	6	3	1	middle	132000
+FXX	Archer	07.07.2023	23:30	00:00	30	12	1	1	end	128000
+FXX	Archer	08.07.2023	22:30	23:00	30	12	1	1	middle	64000
+FXX	Archer	09.07.2023	00:30	01:00	30	12	1	1	beginning	64000
+FXX	It's Always Sunny	10.07.2023	21:00	21:30	30	15	2	1	beginning	90000
+FXX	It's Always Sunny	11.07.2023	20:00	20:30	30	15	2	1	middle	45000
+FXX	It's Always Sunny	12.07.2023	22:00	22:30	30	15	2	1	end	90000
+FXX	The Simpsons	13.07.2023	19:30	20:00	30	18	3	1	middle	108000
+Hist	Mankind	08.07.2023	20:00	21:00	60	5	2	0	middle	86000
+Hist	Mankind	09.07.2023	19:00	20:00	60	5	2	0	beginning	43000
+Hist	Mankind	10.07.2023	21:00	22:00	60	5	2	0	end	86000
+Hist	Vikings	11.07.2023	22:30	23:30	60	6	3	0	end	102000
+Hist	Vikings	12.07.2023	21:30	22:30	60	6	3	0	middle	51000
+Hist	Vikings	13.07.2023	23:30	00:30	60	6	3	0	beginning	102000
+Hist	Ancient Aliens	14.07.2023	20:00	21:00	60	7	4	0	beginning	119000
+TLC	My 600-lb	09.07.2023	18:00	19:00	60	14	3	0	beginning	72000
+TLC	My 600-lb	10.07.2023	17:00	18:00	60	14	3	0	middle	36000
+TLC	My 600-lb	11.07.2023	19:00	20:00	60	14	3	0	end	72000
+TLC	90 Day Fiancé	12.07.2023	20:30	21:30	60	16	4	0	end	112000
+TLC	90 Day Fiancé	13.07.2023	19:30	20:30	60	16	4	0	middle	56000
+Viye	Little	12.12.2023	12:59	21:17	15	320	1	1	end	240000
