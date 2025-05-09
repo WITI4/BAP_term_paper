@@ -103,10 +103,10 @@ int main() {
 
                                 system("cls");
                                 std::vector<AdTime> searchResults;
-                                for (const auto& ad : authSystem.adTimes) {
-                                    std::string lowerChannel = toLower(ad.GetChannel());
+                                for (int i = 0; i < authSystem.adTimes.size(); i++) {
+                                    std::string lowerChannel = toLower(authSystem.adTimes[i].GetChannel());
                                     if (lowerChannel.find(lowerSearchQuery) != std::string::npos) {
-                                        searchResults.push_back(ad);
+                                        searchResults.push_back(authSystem.adTimes[i]);
                                         found = true;
                                     }
                                 }
@@ -126,22 +126,22 @@ int main() {
 
                                 while (!selectionDone) {
                                     const std::string columnMenu[] = {
-                                        std::string(selectedColumns[FILTER_CHANNEL] ? "[X]" : "[ ]") + " Канал",
-                                        std::string(selectedColumns[FILTER_PROGRAM] ? "[X]" : "[ ]") + " Программа",
-                                        std::string(selectedColumns[FILTER_DATE] ? "[X]" : "[ ]") + " Дата",
-                                        std::string(selectedColumns[FILTER_TIME] ? "[X]" : "[ ]") + " Время",
-                                        std::string(selectedColumns[FILTER_DURATION] ? "[X]" : "[ ]") + " Длительность",
-                                        std::string(selectedColumns[FILTER_DAYS] ? "[X]" : "[ ]") + " Дни показа",
-                                        std::string(selectedColumns[FILTER_SHOWS_PER_DAY] ? "[X]" : "[ ]") + " Показов в день",
-                                        std::string(selectedColumns[FILTER_PRIME_TIME] ? "[X]" : "[ ]") + " Прайм-тайм",
-                                        std::string(selectedColumns[FILTER_POSITION] ? "[X]" : "[ ]") + " Позиция",
-                                        std::string(selectedColumns[FILTER_PRICE] ? "[X]" : "[ ]") + " Цена",
+                                        std::string(selectedColumns[FILTER_CHANNEL] ? "[*]" : "[ ]") + " Канал",
+                                        std::string(selectedColumns[FILTER_PROGRAM] ? "[*]" : "[ ]") + " Программа",
+                                        std::string(selectedColumns[FILTER_DATE] ? "[*]" : "[ ]") + " Дата",
+                                        std::string(selectedColumns[FILTER_TIME] ? "[*]" : "[ ]") + " Время",
+                                        std::string(selectedColumns[FILTER_DURATION] ? "[*]" : "[ ]") + " Длительность",
+                                        std::string(selectedColumns[FILTER_DAYS] ? "[*]" : "[ ]") + " Дни показа",
+                                        std::string(selectedColumns[FILTER_SHOWS_PER_DAY] ? "[*]" : "[ ]") + " Показов в день",
+                                        std::string(selectedColumns[FILTER_PRIME_TIME] ? "[*]" : "[ ]") + " Прайм-тайм",
+                                        std::string(selectedColumns[FILTER_POSITION] ? "[*]" : "[ ]") + " Позиция",
+                                        std::string(selectedColumns[FILTER_PRICE] ? "[*]" : "[ ]") + " Цена",
                                         "Подтвердить выбор",
                                         "Вернуться назад"
                                     };
                                     const int columnMenuCount = sizeof(columnMenu) / sizeof(columnMenu[0]);
 
-                                    int choice = main_showMenu(".../firstLevelMenu/registrationMenu/USER/userFilter/", columnMenu, columnMenuCount, 1);
+                                    int choice = main_showMenu(".../firstLevelMenu/registrationMenu/ADMIN/adminFilter/", columnMenu, columnMenuCount, 1);
 
                                     if (choice >= 0 && choice < FILTER_COUNT - 2) {
                                         selectedColumns[choice] = !selectedColumns[choice];
@@ -284,9 +284,7 @@ int main() {
                                             continue;
                                         }
 
-                                        dateStr = (day < 10 ? "0" : "") + std::to_string(day) + "." +
-                                            (month < 10 ? "0" : "") + std::to_string(month) + "." +
-                                            std::to_string(year);
+                                        dateStr = (day < 10 ? "0" : "") + std::to_string(day) + "." + (month < 10 ? "0" : "") + std::to_string(month) + "." + std::to_string(year);
                                         newAd.SetDate(dateStr);
                                         dateValid = true;
                                     }
@@ -358,8 +356,7 @@ int main() {
                                             continue;
                                         }
 
-                                        endTimeStr = (endHour < 10 ? "0" : "") + std::to_string(endHour) + ":" +
-                                            (endMinute < 10 ? "0" : "") + std::to_string(endMinute);
+                                        endTimeStr = (endHour < 10 ? "0" : "") + std::to_string(endHour) + ":" + (endMinute < 10 ? "0" : "") + std::to_string(endMinute);
                                         newAd.SetEndTime(endTimeStr);
                                         endTimeValid = true;
                                     }
@@ -524,9 +521,7 @@ int main() {
                                             continue;
                                         }
 
-                                        dateStr = (day < 10 ? "0" : "") + std::to_string(day) + "." +
-                                            (month < 10 ? "0" : "") + std::to_string(month) + "." +
-                                            std::to_string(year);
+                                        dateStr = (day < 10 ? "0" : "") + std::to_string(day) + "." + (month < 10 ? "0" : "") + std::to_string(month) + "." + std::to_string(year);
                                         editAd.SetDate(dateStr);
                                         dateValid = true;
                                     }
@@ -559,8 +554,7 @@ int main() {
                                             }
                                         }
 
-                                        startTimeStr = (startHour < 10 ? "0" : "") + std::to_string(startHour) + ":" +
-                                            (startMinute < 10 ? "0" : "") + std::to_string(startMinute);
+                                        startTimeStr = (startHour < 10 ? "0" : "") + std::to_string(startHour) + ":" + (startMinute < 10 ? "0" : "") + std::to_string(startMinute);
                                         editAd.SetStartTime(startTimeStr);
                                         startTimeValid = true;
                                     }
@@ -741,10 +735,10 @@ int main() {
 
                                     system("cls");
                                     std::vector<AdTime> searchResults;
-                                    for (const auto& ad : authSystem.adTimes) {
-                                        std::string lowerChannel = toLower(ad.GetChannel());
+                                    for (int i = 0; i < authSystem.adTimes.size(); i++) {
+                                        std::string lowerChannel = toLower(authSystem.adTimes[i].GetChannel());
                                         if (lowerChannel.find(lowerSearchQuery) != std::string::npos) {
-                                            searchResults.push_back(ad);
+                                            searchResults.push_back(authSystem.adTimes[i]);
                                             found = true;
                                         }
                                     }

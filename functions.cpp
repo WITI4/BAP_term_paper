@@ -3,10 +3,8 @@
 #include <string>
 #include <fstream>
 #include <vector>
-#include <ctime>
 #include <algorithm>
 #include <iomanip>
-#include <functional>
 
 enum FilterMenu { FILTER_CHANNEL, FILTER_PROGRAM, FILTER_DATE, FILTER_TIME, FILTER_DURATION, FILTER_DAYS, FILTER_SHOWS_PER_DAY, FILTER_PRIME_TIME, FILTER_POSITION, FILTER_PRICE, FILTER_CONFIRM, FILTER_GO_BACK, FILTER_COUNT };
 
@@ -81,7 +79,7 @@ public:
             << (isBlocked ? "1" : "0") << "\n";
     }
 };
-
+ 
 class AdTime {
     std::string channel;
     std::string program;
